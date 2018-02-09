@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+  <p> A shallow water equations model</p>
+  <script src="../../../core/scripts/main.js"></script>
+  <script>
+    let data = {
+      bathymetry: '../data/bathymetry_SA',
+      earthquake: '../data/earthquake.csv',
+      coordinates: 'spherical',
+      waveWidth: 361,
+      waveHeight: 361,
+      displayWidth: 512,
+      displayHeight: 512,
+      xmin : -120,
+      xmax : -60,
+      ymin :  -60,
+      ymax : 0.0
+    }
+
+    let output = {
+      stopTime: 6*60*60,
+      pois: {
+        'dart': {
+          location:[-86.374, -17.984 ]
+        }
+      }
+    };
+
+    let thismodel = new NAMI(data, output);
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+  <p> A shallow water equations model</p>
+  <script src="../../../core/scripts/main.js"></script>
+  <script>
+    let data = {
+      bathymetry: 'bathymetry',
+      finiteFault:{
+        L: 3,
+        W: 2,
+        depth: 4,
+        slip: 1.0,
+        strike: 90.0,
+        dip: 90.0,
+        rake: 0.0,
+        U3: 0.0,
+        cn: 0,
+        ce: 0,
+        reference: 'begin bottom'
+      },
+      coordinates: 'cartesian',
+      waveWidth: 21,
+      waveHeight: 21,
+      displayWidth: 512,
+      displayHeight: 512,
+      xmin : -10,
+      xmax : 10,
+      ymin :  -10,
+      ymax : 10,
+
+    };
+
+    let output = {
+      stopTime: 0
+    };
+
+    let strikeSlipModel = new NAMI(data,output);
+
+    
+    let data2 = Object.assign({},data);
+    data2.finiteFault = Object.assign({},data2.finiteFault);
+    data2.finiteFault.rake = 90;
+    let dipSlipModel = new NAMI(data2,output);
+
+
+    let data3 = Object.assign({},data);
+    data3.finiteFault = Object.assign({}, data3.finiteFault);
+    data3.finiteFault.slip = 0.0;
+    data3.finiteFault.rake = 0.0;
+    data3.finiteFault.U3 = 1.0;
+    let tensileFaultModel = new NAMI(data3,output);
+
+
+    setTimeout(()=>{
+      strikeSlipModel.controller.downloadCurrentGridHeights();
+      dipSlipModel.controller.downloadCurrentGridHeights();
+      tensileFaultModel.controller.downloadCurrentGridHeights();
+    },1000);
+
+
+  </script>
+</body>
+
+</html>

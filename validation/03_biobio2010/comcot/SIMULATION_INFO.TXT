@@ -1,0 +1,49 @@
+ ***********************************************************
+ *           INPUT INFORMATION - COMCOT V1.7               *
+ ***********************************************************
+ #Job Description: NZ30sec bathymetry, Spherical Coordinates for code testing                                                                                                                            
+ ------------------- GENERAL INFORMATION -------------------
+     TOTAL RUN TIME            (SECOND) :   14400.0000    
+     TIME INTERVAL FOR OUTPUT  (SECOND) :   3600.00000    
+     TIME STEP SIZE            (SECOND) :   16.6200008    
+     TOTAL STEPS TO RUN         (STEPS) :         866
+     STEP INTERVAL FOR OUTPUT   (STEPS) :         217
+     MAX. SURFACE DISPLACEMENT OUTPUT   : ENABLED
+     TIME HISTORY RECORD OUTPUT         : DISABLED
+     SHORELINE LOCATED AT DEPTH CONTOUR :   10.0000000    
+     BOUNDARY CONDITION                 : RADIATION (OPEN)
+  
+ ---------------- INITIAL CONDITION INFORMATION ---------------
+     #USE BUILT-IN FAULT MODEL
+        TOTAL NUMBER OF FAULT SEGMENTS  :           1
+      PARAMETERS FOR FAULT SEGMENT      :           1
+        FAULT RUPTURE TIME     (SECOND) :   0.00000000    
+        EPICENTER (LON, LAT)   (DEGREE) :  -72.6679993      -35.8260002    
+        FOCAL DEPTH         (KILOMETER) :   35.0000000    
+        FAULT LENGTH        (KILOMETER) :   450.000000    
+        FAULT WIDTH         (KILOMETER) :   9.99999978E-03
+        STRIKE ANGLE    (THETA, DEGREE) :   16.0000000    
+        DIP ANGLE       (DELTA, DEGREE) :   14.0000000    
+        SLIP ANGLE     (LAMBDA, DEGREE) :   15.0000000    
+        DISLOCATION             (METER) :   1500.00000    
+  
+ --------------- 1ST-LEVEL GRID INFORMATION -----------------
+     #  GRID IDENTIFICATION NUMBER      :           1
+        USE SPHERICAL COORDINATE SYSTEM
+        USE LINEAR SHALLOW WATER EQUATIONS
+        BOTTOM FRICTION                 : DISABLED
+        VOLUME FLUX OUTPUT              : DISABLED
+        SURFACE DISPLACEMENT OUTPUT     : ENABLED
+        GRID LAYER POSITIONS            :
+            X_START            (DEGREE) :  -120.000000    
+            X_END              (DEGREE) :  -60.0000000    
+            Y_START            (DEGREE) :  -60.0000000    
+            Y_END              (DEGREE) :   0.00000000    
+        GRID DIMENSION          (NX*NY) :         361 *         361
+        GRID SIZE           (DX,MINUTE) :   10.0000000    
+        GRID SIZE           (DY,MINUTE) :   10.0000000    
+        TIME STEP SIZE     (DT, SECOND) :   16.6200008    
+        NUMBER OF CHILD GRID LAYERS     :           0
+        BATHYMETRY DATA FILE NAME       :bathymetry_SA.xyz                                                                                                       
+ --------------- SUB-LEVEL GRID INFORMATION -----------------
+  

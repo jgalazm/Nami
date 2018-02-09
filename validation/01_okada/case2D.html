@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+
+</head>
+
+
+<body>
+  <p> A shallow water equations model</p>
+  <script src="../../../core/scripts/main.js"></script>
+  <script>
+    let data = {
+      bathymetry: 'bathymetry',
+      finiteFault:{
+        L: 5,
+        W: 3,
+        depth: 2,
+        slip: 1.0,
+        strike: 30.0,
+        dip: 70.0,
+        rake: -45.0,
+        U3: 1.0,
+        cn: 0,
+        ce: 0,
+        reference: 'center'
+      },
+      coordinates: 'cartesian',
+      waveWidth: 100,
+      waveHeight: 100,
+      displayWidth: 512,
+      displayHeight: 512,
+      xmin : -10,
+      xmax : 10,
+      ymin :  -10,
+      ymax : 10
+    }
+
+    let output = {
+      stopTime: 0
+    };
+
+    let thismodel = new NAMI(data,output);
+
+    setTimeout(()=> thismodel.controller.downloadCurrentGridHeights(), 1000);
+    
+
+  </script>
+</body>
+
+</html>

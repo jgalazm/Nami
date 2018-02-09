@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <p> Compare heights profile at adimensional time = 40. See notebook.</p>
+    <script src="../../../core/scripts/main.js"></script>
+    <script>
+        
+
+        let data = {
+            bathymetry: '../data/bathymetry',
+            initialSurface: '../data/initialSurface',
+            coordinates: 'cartesian',
+            waveWidth: 280,
+            waveHeight: 280,
+            displayWidth: 512,
+            displayHeight: 512,
+            xmin : -70,
+            xmax : 69.5,
+            ymin :  -70,
+            ymax : 69.5,
+            timeStep: 0.3/Math.sqrt(9.81*0.2)
+        }
+
+        let output = {
+            stopTime: 40/Math.sqrt(9.81*0.2)
+        }
+
+        let nami = new NAMI(data,output);
+    </script>
+</body>
+
+</html>

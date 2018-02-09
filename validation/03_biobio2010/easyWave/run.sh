@@ -1,0 +1,1 @@
+easywave -grid ../data/gebco10mins.grd -source ../data/fault.flt -time 480 -poi pois -poi_report
