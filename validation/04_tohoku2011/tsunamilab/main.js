@@ -1,5 +1,5 @@
-let w = parseInt(1350/2);
-let h = parseInt(1801/2);
+let w = parseInt(1350);
+let h = parseInt(1801);
 
 let data = {
     bathymetry: '../data/bathymetry',
@@ -24,8 +24,8 @@ let output = {
         '21414': {location: [178.219, 48.968]},
         '21418': {location: [148.645, 38.727]},
         '21419': {location: [155.717, 44.435]},
-        '51407': {location: [-156.545, 19.57]},
-        '51425': {location: [-176.32, -9.517]},
+        '51407': {location: [-156.545+180, 19.57]},
+        '51425': {location: [-176.32+180, -9.517]},
         '52403': {location: [145.52, 4.02]},
         '52406': {location: [164.977, -5.307]},
         '55012': {location: [158.453, -15.66]}
