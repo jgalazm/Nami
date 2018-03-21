@@ -1,14 +1,14 @@
-let w = parseInt(2101);
-let h = parseInt(1801);
+let w = parseInt(4801);
+let h = parseInt(4201);
 
 let data = {
     bathymetry: '../data/bathymetry',
     earthquake: '../data/earthquake.csv',
     coordinates: 'spherical',
-    waveWidth: w/2,
-    waveHeight: h/2,
-    displayWidth:  w/2,
-    displayHeight: h/2,
+    waveWidth: w/4,
+    waveHeight: h/4,
+    displayWidth:  w/4,
+    displayHeight: h/4,
     xmin : 135,
     xmax :  215,
     ymin :  -20,
