@@ -6,8 +6,8 @@ let data = {
     binaryBathymetry: true,
     earthquake: '../data/earthquake.csv',
     coordinates: 'spherical',
-    waveWidth: w/4,
-    waveHeight: h/4,
+    waveWidth: parseInt(w/4),
+    waveHeight: parseInt(h/4),
     displayWidth:  w/3,
     displayHeight: h/3,
     xmin : 135,
@@ -46,9 +46,9 @@ let output = {
 let lifeCycle = {
     controllerSimulationDidFinish : (model, controller) =>{
         // controller.5();
-        // controller.downloadCurrentGridHeights();
-        // controller.downloadMaximumHeights();
-        // controller.downloadArrivalTimes() 
+        controller.downloadCurrentGridHeights();
+        controller.downloadMaximumHeights();
+        controller.downloadArrivalTimes() 
         controller.downloadAllPois();    
     },
 
@@ -60,6 +60,7 @@ let lifeCycle = {
 
     dataWasLoaded: (model)=>{
         document.body.appendChild(model.canvas);
+        console.log(model);
     }
 }
 
