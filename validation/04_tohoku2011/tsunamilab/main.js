@@ -1,8 +1,9 @@
-let w = parseInt(4801);
-let h = parseInt(4201);
+let w = parseInt(2401);
+let h = parseInt(2101);
 
 let data = {
     bathymetry: '../data/bathymetry',
+    binaryBathymetry: true,
     earthquake: '../data/earthquake.csv',
     coordinates: 'spherical',
     waveWidth: w/4,
