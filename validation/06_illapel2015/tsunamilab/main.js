@@ -4,18 +4,7 @@ let h = parseInt(601);
 let data = {
     bathymetry: '../data/bathymetry',
     binaryBathymetry: true,
-    earthquake: [{
-        L: 245934.81198479046,
-        W: 122967.40599239523,
-        ce: -71.6744,
-        cn: -31.5729,
-        depth: 22440,
-        dip: 71,
-        rake: 92,
-        strike: 180,
-        slip: 2.53,
-        U3: 0.0
-    }],
+    earthquake: '../data/earthquake.csv',
     coordinates: 'spherical',
     waveWidth: parseInt(w),
     waveHeight: parseInt(h),
