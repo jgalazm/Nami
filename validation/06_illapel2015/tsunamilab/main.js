@@ -1,19 +1,19 @@
-let w = parseInt(361);
-let h = parseInt(601);
+let w = parseInt(3101);
+let h = parseInt(1701);
 
 let data = {
     bathymetry: '../data/bathymetry',
     binaryBathymetry: true,
     earthquake: '../data/earthquake.csv',
     coordinates: 'spherical',
-    waveWidth: parseInt(w),
-    waveHeight: parseInt(h),
-    displayWidth:  w,
-    displayHeight: h,
-    xmin : -76,
-    xmax :  -70,
+    waveWidth: parseInt(w/3),
+    waveHeight: parseInt(h/3),
+    displayWidth:  w/4,
+    displayHeight: h/4,
+    xmin : 135,
+    xmax :  360-70,
     ymin :  -35,
-    ymax : -25
+    ymax : 50
 }
 
 let output = {
@@ -36,11 +36,12 @@ let output = {
         '46412': {location:[239.437,32.492]},
         '43412': {location:[253.03300000000002,16.045]},
         '43413': {location:[259.91700000000003,11.012]},
-        '32411': {location:[269.12,4.953]},
-        '32412': {location:[273.626,-17.984]},
-        '32413': {location:[266.483,-7.406]},
-        '32401': {location:[286.579,-20.474]},
+        '32411': {location:[269.12-360,4.953]},
+        '32412': {location:[273.626-360,-17.984]},
+        '32413': {location:[266.483-360,-7.406]},
+        '32401': {location:[286.579-360,-20.474]},
     }
+    
 };
 
 let lifeCycle = {
