@@ -13,11 +13,11 @@
 
 <body>
   <p> A shallow water equations model</p>
-  <script src="../../../core/scripts/main.js"></script>
+  <script src="../../build/nami.js"></script>
   <script>
     let data = {
       bathymetry: 'bathymetry',
-      finiteFault:{
+      earthquake:[{
         L: 5,
         W: 3,
         depth: 2,
@@ -29,7 +29,7 @@
         cn: 0,
         ce: 0,
         reference: 'center'
-      },
+      }],
       coordinates: 'cartesian',
       waveWidth: 100,
       waveHeight: 100,
@@ -45,11 +45,12 @@
       stopTime: 0
     };
 
-    let thismodel = new NAMI(data,output);
-
-    setTimeout(()=> thismodel.controller.downloadCurrentGridHeights(), 1000);
+    let thismodel = new NAMI.driver(data,output,{
+        controllerSimulationDidFinish: (model, controller) => {
+          controller.downloadCurrentGridHeights();
+      }
+    });
     
-
   </script>
 </body>
 
