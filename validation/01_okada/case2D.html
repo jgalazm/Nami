@@ -42,16 +42,12 @@
     }
 
     let output = {
-      stopTime: 1
+      stopTime: 0
     };
 
     let thismodel = new NAMI.driver(data,output,{
         controllerSimulationDidFinish: (model, controller) => {
-          // controller.downloadCurrentGridHeights();
-      },
-      dataWasLoaded: (model)=>{
-        document.body.appendChild(model.canvas);
-        console.log(model);
+          controller.downloadCurrentGridHeights();
       }
     });
     
