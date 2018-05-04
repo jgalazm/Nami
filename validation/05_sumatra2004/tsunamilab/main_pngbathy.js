@@ -22,7 +22,12 @@ let output = {
     displayOption: 'heights'
 };
 
+let niterations = 0;
 let lifeCycle = {
+    dataWasLoaded : (model)=>{
+        document.body.appendChild(model.canvas);
+
+    },
     controllerSimulationDidFinish : (model, controller) =>{
         // controller.downloadCurrentGridHeights();
         // controller.downloadMaximumHeights();
@@ -30,10 +35,20 @@ let lifeCycle = {
     },
 
     modelStepDidFinish: (model, controller) =>{
-        if(model.discretization.stepNumber % 100==0){
+        if(model.discretization.stepNumber % 1000==0){
             console.log(model.currentTime/60/60, controller.stopTime/60/60);
         }
+        niterations = niterations + 1;
+
+        if( niterations%10 == 0){
+            niterations = 0;
+            return false;
+        }
+        else{
+            return true;
+        }
+        
     }
 }
 
-let thismodel = new NAMI(data, output, lifeCycle);
+let thismodel = new NAMI.driver(data, output, lifeCycle);
