@@ -37,6 +37,7 @@ let niterations = 0;
 let lifeCycle = {
     dataWasLoaded: (model) => {
         document.body.appendChild(model.canvas);
+        console.log('adsfadsf');
 
     },
     controllerSimulationDidFinish: (model, controller) => {
