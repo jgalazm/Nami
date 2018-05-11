@@ -28,8 +28,9 @@ let data = {
 }
 
 let output = {
-    stopTime: 30 * 60 * 60,
-    displayOption: 'heights'
+    stopTime: 30 * 60,
+    displayOption: 'heights',
+    loop:true
 };
 
 let niterations = 0;
