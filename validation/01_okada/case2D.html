@@ -45,9 +45,11 @@
       stopTime: 0
     };
 
-    let thismodel = new NAMI.driver(data,output,{
+    let thismodel = new NAMI.app(data,output,{
         controllerSimulationDidFinish: (model, controller) => {
           controller.downloadCurrentGridHeights();
+          document.body.appendChild(model.canvas);
+
       }
     });
     

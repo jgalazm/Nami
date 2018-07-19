@@ -30,7 +30,7 @@ let output = {
 
 
 //  strike slip
-let strikeSlipModel = new NAMI.driver(data, output, {
+let strikeSlipModel = new NAMI.app(data, output, {
     controllerSimulationDidFinish: (model, controller) => {
         controller.downloadCurrentGridHeights();
     }
@@ -63,7 +63,7 @@ let data_dipslip = {
     ymin: -10,
     ymax: 10,
 }
-let dipSlipModel = new NAMI.driver(data_dipslip, output, {
+let dipSlipModel = new NAMI.app(data_dipslip, output, {
     controllerSimulationDidFinish: (model, controller) => {
         controller.downloadCurrentGridHeights();
     }
@@ -96,7 +96,7 @@ let data_tensile = {
     ymin: -10,
     ymax: 10,
 }
-let tensileFaultModel = new NAMI.driver(data_tensile, output, {
+let tensileFaultModel = new NAMI.app(data_tensile, output, {
     controllerSimulationDidFinish: (model, controller) => {
         controller.downloadCurrentGridHeights();
     }
