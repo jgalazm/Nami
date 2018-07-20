@@ -17,7 +17,7 @@ let data = {
 }
 
 let output = {
-    stopTime: 60*60*24,
+    stopTime: 60*60*3,
     displayOption: 'arrival times',
     pois:{
         '21414': {location:[178.219,48.968]},
@@ -42,14 +42,40 @@ let output = {
         '32401': {location:[286.579,-20.474]},
     }
 };
-
+debugger;
 let lifeCycle = {
     controllerSimulationDidFinish : (model, controller) =>{
         // controller.5();
-        controller.downloadCurrentGridHeights();
-        controller.downloadMaximumHeights();
-        controller.downloadArrivalTimes() 
-        controller.downloadAllPois();    
+        // controller.downloadCurrentGridHeights();
+        // controller.downloadMaximumHeights();
+        // controller.downloadArrivalTimes() 
+        // controller.downloadAllPois();    
+
+        let arrivalsBuffer = [ ... model.currentArrivalTimes ];
+
+        // var arrivalTimes = [];
+        // while(arrivalsBuffer.length) arrivalTimes.push(arrivalsBuffer.splice(0,data.waveWidth));
+
+        // arrivalTimes.reduce( (anterior, actual) => Math.max(anterior, Math.max( ... actual)),0)
+
+        var i0 = d3.interpolateHsvLong(d3.hsv(120, 1, 0.65), d3.hsv(60, 1, 0.90)),
+        i1 = d3.interpolateHsvLong(d3.hsv(60, 1, 0.90), d3.hsv(0, 0, 0.95));
+        var interpolateTerrain = function(t) { return t < 0.5 ? i0(t * 2) : i1((t - 0.5) * 2); },
+        color = d3.scaleSequential(interpolateTerrain).domain([0, output.stopTime]);
+
+        let contours = d3.contours()
+                        .size([data.waveWidth,data.waveHeight ])
+                        .thresholds(d3.range(0, output.stopTime, 60*60))(arrivalsBuffer);
+        var svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
+                    
+        svg.selectAll("path")
+            .data(contours)
+            .enter().append("path")
+            .attr("d", d3.geoPath(d3.geoIdentity() ))
+            .attr("fill", function(d) { return color(d.value); })
+
     },
 
     modelStepDidFinish: (model, controller) =>{
@@ -64,4 +90,4 @@ let lifeCycle = {
     }
 }
 
-let thismodel = new NAMI(data, output, lifeCycle);
+let thisApp = new NAMI.app(data, output, lifeCycle);
