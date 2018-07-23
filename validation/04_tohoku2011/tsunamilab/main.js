@@ -1,25 +1,25 @@
-let w = parseInt(2160);
-let h = parseInt(840);
+let w = parseInt(2400);
+let h = parseInt(1680);
 
 let data = {
+    xmin : 90,
+    xmax :  290,
+    ymin :  -70,
+    ymax : 70,
+    waveWidth: w/4,
+    waveHeight: h/4,
+    coordinates: 'spherical',
     bathymetry: '../data/bathymetry',
     binaryBathymetry: true,
     earthquake: '../data/earthquake.csv',
-    coordinates: 'spherical',
-    waveWidth: w/2,
-    waveHeight: h/2,
-    displayWidth:  w/2,
-    displayHeight: h/2,
-    xmin : -180,
-    xmax :  180,
-    ymin :  -70,
-    ymax : 70,
-    isPeriodic: true
+    isPeriodic: false,
+    displayWidth:  w/4,
+    displayHeight: h/4,
 }
 
 let output = {
-    stopTime: 60*60*5,
-    displayOption: 'arrival times',
+    stopTime: 60*60*25,
+    displayOption: 'heights',
     pois:{
         '21414': {location:[178.219,48.968]},
         '21419': {location:[155.717,44.435]},
@@ -47,17 +47,12 @@ debugger;
 let lifeCycle = {
     controllerSimulationDidFinish : (model, controller) =>{
         // controller.5();
-        // controller.downloadCurrentGridHeights();
-        // controller.downloadMaximumHeights();
-        // controller.downloadArrivalTimes() 
-        // controller.downloadAllPois();    
+        controller.downloadCurrentGridHeights();
+        controller.downloadMaximumHeights();
+        controller.downloadArrivalTimes() 
+        controller.downloadAllPois();    
 
         let arrivalsBuffer = [ ... model.currentArrivalTimes ];
-
-        // var arrivalTimes = [];
-        // while(arrivalsBuffer.length) arrivalTimes.push(arrivalsBuffer.splice(0,data.waveWidth));
-
-        // arrivalTimes.reduce( (anterior, actual) => Math.max(anterior, Math.max( ... actual)),0)
 
         var i0 = d3.interpolateHsvLong(d3.hsv(120, 1, 0.65), d3.hsv(60, 1, 0.90)),
         i1 = d3.interpolateHsvLong(d3.hsv(60, 1, 0.90), d3.hsv(0, 0, 0.95));
@@ -80,21 +75,17 @@ let lifeCycle = {
     },
 
     modelStepDidFinish: (model, controller) =>{
-        if(model.discretization.stepNumber % 100==0){
-            console.log(model.discretization.stepNumber, model.currentTime/60/60, controller.stopTime/60/60);
-        }
         if(model.discretization.stepNumber % 100 !== 0){
-            console.log(model.discretization.stepNumber)
             return true;
         }
         else{
+            console.log(model.discretization.stepNumber, model.currentTime/60/60, controller.stopTime/60/60);
             return false;
         }
     },
 
     dataWasLoaded: (model)=>{
         document.body.appendChild(model.canvas);
-        console.log(model);
     }
 }
 
