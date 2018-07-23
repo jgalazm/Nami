@@ -11,13 +11,12 @@ let data = {
     coordinates: 'spherical',
     bathymetry: '../data/bathymetry',
     binaryBathymetry: true,
-    earthquake: '../data/earthquake.csv',
-    isPeriodic: false,
-    displayWidth:  w/4,
-    displayHeight: h/4,
+    earthquake: '../data/earthquake.csv'
 }
 
 let output = {
+    displayWidth:  w/4,
+    displayHeight: h/4,
     stopTime: 60*60*25,
     displayOption: 'heights',
     pois:{
