@@ -1,23 +1,24 @@
-let w = parseInt(3101);
-let h = parseInt(1401);
+let w = parseInt(2160);
+let h = parseInt(840);
 
 let data = {
     bathymetry: '../data/bathymetry',
     binaryBathymetry: true,
     earthquake: '../data/earthquake.csv',
     coordinates: 'spherical',
-    waveWidth: parseInt(w/4),
-    waveHeight: parseInt(h/4),
-    displayWidth:  w/3,
-    displayHeight: h/3,
-    xmin : 135,
-    xmax :  290,
-    ymin :  -20,
-    ymax : 50
+    waveWidth: w/2,
+    waveHeight: h/2,
+    displayWidth:  w/2,
+    displayHeight: h/2,
+    xmin : -180,
+    xmax :  180,
+    ymin :  -70,
+    ymax : 70,
+    isPeriodic: true
 }
 
 let output = {
-    stopTime: 60*60*3,
+    stopTime: 60*60*5,
     displayOption: 'arrival times',
     pois:{
         '21414': {location:[178.219,48.968]},
@@ -74,13 +75,20 @@ let lifeCycle = {
             .data(contours)
             .enter().append("path")
             .attr("d", d3.geoPath(d3.geoIdentity() ))
-            .attr("fill", function(d) { return color(d.value); })
+            // .attr("fill", function(d) { return color(d.value); })
 
     },
 
     modelStepDidFinish: (model, controller) =>{
         if(model.discretization.stepNumber % 100==0){
-            console.log(model.currentTime/60/60, controller.stopTime/60/60);
+            console.log(model.discretization.stepNumber, model.currentTime/60/60, controller.stopTime/60/60);
+        }
+        if(model.discretization.stepNumber % 100 !== 0){
+            console.log(model.discretization.stepNumber)
+            return true;
+        }
+        else{
+            return false;
         }
     },
 
