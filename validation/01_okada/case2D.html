@@ -33,16 +33,16 @@
       coordinates: 'cartesian',
       waveWidth: 100,
       waveHeight: 100,
-      displayWidth: 512,
-      displayHeight: 512,
       xmin : -10,
       xmax : 10,
       ymin :  -10,
       ymax : 10
     }
-
+    
     let output = {
-      stopTime: 0
+      stopTime: 0,
+      displayWidth: 512,
+      displayHeight: 512,
     };
 
     let thismodel = new NAMI.app(data,output,{

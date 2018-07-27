@@ -13,7 +13,7 @@ let data = {
     binaryBathymetry: true,
     earthquake: '../data/earthquake.csv'
 }
-//187,337
+
 let output = {
     displayWidth:  w/4,
     displayHeight: h/4,
@@ -42,7 +42,7 @@ let output = {
         '32401': {location:[286.579,-20.474]},
     }
 };
-;
+debugger;
 let lifeCycle = {
     controllerSimulationDidFinish : (model, controller) =>{
         // controller.5();
