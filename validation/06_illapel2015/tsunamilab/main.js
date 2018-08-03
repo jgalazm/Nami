@@ -133,7 +133,10 @@ let lifeCycle = {
     },
 
     modelStepDidFinish: (model, controller) =>{
-        if(model.discretization.stepNumber % 1000 !== 0){
+        if(model.discretization.stepNumber == 1){
+            controller.downloadCurrentGridHeights();
+        }
+        if(model.discretization.stepNumber % 50 !== 0){
             return true;
         }
         else{
