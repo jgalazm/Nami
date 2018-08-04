@@ -105,7 +105,6 @@ let output = {
 let lifeCycle = {
     controllerSimulationDidFinish : (model, controller) =>{
         // controller.5();
-        controller.downloadCurrentGridHeights();
         controller.downloadMaximumHeights();
         controller.downloadArrivalTimes() 
         controller.downloadAllPois();    
