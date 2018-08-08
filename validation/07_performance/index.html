@@ -1,0 +1,98 @@
+<body>
+  <p> A shallow water equations model</p>
+  <script src="../../build/nami.js"></script>
+  <script>
+
+    let t0, tf;
+    let meshSizes = [1000];
+    let meshReady = [];
+    let T0 = [];
+    let Telapsed = [];
+    let models = [];
+
+
+    let data0 = {
+      bathymetry: [[100, 100], [100, 100]],
+      earthquake: [{
+        L: 5,
+        W: 3,
+        depth: 2,
+        slip: 1.0,
+        strike: 30.0,
+        dip: 70.0,
+        rake: -45.0,
+        U3: 1.0,
+        cn: 0,
+        ce: 0,
+        reference: 'center'
+      }],
+      coordinates: 'cartesian',
+      waveWidth: 50,
+      waveHeight: 50,
+      xmin: -10000,
+      xmax: 10000,
+      ymin: -10000,
+      ymax: 10000
+    }
+
+    let output = {
+      stopTime: 60*10,
+      displayWidth: 100,
+      displayHeight: 100,
+    };
+
+    let lifeCycle = {
+      dataWasLoaded: (model) => {
+        console.log('\nStarting simulation:', model.discretization.numberOfCells)
+        // document.body.appendChild(model.canvas);
+        T0.push(performance.now());
+
+      },
+      modelStepDidFinish: (model, controller) => {
+        let stayInLoop = true;
+
+        if (model.discretization.stepNumber % 1 == 0) {
+          console.log(model.currentTime, controller.stopTime, model.discretization.stepNumber);
+        }
+
+        if (model.currentTime > controller.stopTime) {
+
+          stayInLoop = false;
+        }
+
+        return stayInLoop;
+      },
+      controllerSimulationDidFinish: (model, controller) => {
+        Telapsed.push(performance.now() - T0[T0.length-1]);
+
+
+        console.log('Finished simulation', model.discretization.numberOfCells);
+
+
+        startMeshSimulation();
+      }
+    };
+
+
+    let startMeshSimulation = ()=>{
+      if(meshSizes.length>0){
+        let nx = meshSizes.pop();
+        meshReady.push(nx);      
+  
+        let newData = Object.assign(data0, {waveWidth: nx, waveHeight: nx});
+        newData = JSON.parse(JSON.stringify(newData));
+        models.push( new NAMI.app(newData, output, lifeCycle) );
+      }
+      else{
+        console.log('all meshes done');
+        console.log(meshReady);
+        console.log(Telapsed);
+      }
+    }
+
+    startMeshSimulation();
+
+  </script>
+</body>
+
+</html>
