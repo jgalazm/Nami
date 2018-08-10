@@ -81,7 +81,7 @@ let output = {
         '32401': {location:[286.579,-20.474]},
     }
 };
-debugger;
+
 let lifeCycle = {
     controllerSimulationDidFinish : (model, controller) =>{
         // controller.5();
