@@ -1,5 +1,5 @@
-let w = parseInt(600);
-let h = parseInt(420);
+let w = parseInt(600*5);
+let h = parseInt(420*5);
 
 let cmin = -1.5;
 let cmax = 1.5;
@@ -47,16 +47,17 @@ let data = {
     waveWidth: w,
     waveHeight: h,
     coordinates: 'spherical',
-    bathymetry: '../data/bathymetry',
+    equations: 'dispersive',
+    bathymetry: '../data/bathymetry4min',
     binaryBathymetry: true,
     earthquake: '../data/earthquake.csv'
 }
 
 let output = {
     colormap: colormap,
-    displayWidth:  w,
-    displayHeight: h,
-    stopTime: 60*60*25,
+    displayWidth:  w/4,
+    displayHeight: h/4,
+    stopTime: 60*60*5,
     displayOption: 'heights',
     pois:{
         '21414': {location:[178.219,48.968]},
@@ -90,24 +91,24 @@ let lifeCycle = {
         controller.downloadArrivalTimes() 
         controller.downloadAllPois();    
 
-        let arrivalsBuffer = [ ... model.currentArrivalTimes ];
+        // let arrivalsBuffer = [ ... model.currentArrivalTimes ];
 
-        var i0 = d3.interpolateHsvLong(d3.hsv(120, 1, 0.65), d3.hsv(60, 1, 0.90)),
-        i1 = d3.interpolateHsvLong(d3.hsv(60, 1, 0.90), d3.hsv(0, 0, 0.95));
-        var interpolateTerrain = function(t) { return t < 0.5 ? i0(t * 2) : i1((t - 0.5) * 2); },
-        color = d3.scaleSequential(interpolateTerrain).domain([0, output.stopTime]);
+        // var i0 = d3.interpolateHsvLong(d3.hsv(120, 1, 0.65), d3.hsv(60, 1, 0.90)),
+        // i1 = d3.interpolateHsvLong(d3.hsv(60, 1, 0.90), d3.hsv(0, 0, 0.95));
+        // var interpolateTerrain = function(t) { return t < 0.5 ? i0(t * 2) : i1((t - 0.5) * 2); },
+        // color = d3.scaleSequential(interpolateTerrain).domain([0, output.stopTime]);
 
-        let contours = d3.contours()
-                        .size([data.waveWidth,data.waveHeight ])
-                        .thresholds(d3.range(0, output.stopTime, 60*60))(arrivalsBuffer);
-        var svg = d3.select("svg"),
-            width = +svg.attr("width"),
-            height = +svg.attr("height");
+        // let contours = d3.contours()
+        //                 .size([data.waveWidth,data.waveHeight ])
+        //                 .thresholds(d3.range(0, output.stopTime, 60*60))(arrivalsBuffer);
+        // var svg = d3.select("svg"),
+        //     width = +svg.attr("width"),
+        //     height = +svg.attr("height");
                     
-        svg.selectAll("path")
-            .data(contours)
-            .enter().append("path")
-            .attr("d", d3.geoPath(d3.geoIdentity() ))
+        // svg.selectAll("path")
+        //     .data(contours)
+        //     .enter().append("path")
+        //     .attr("d", d3.geoPath(d3.geoIdentity() ))
             // .attr("fill", function(d) { return color(d.value); })
 
     },
