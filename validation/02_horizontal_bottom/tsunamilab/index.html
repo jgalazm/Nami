@@ -12,30 +12,46 @@
 
 <body>
     <p> Compare heights profile at adimensional time = 40. See notebook.</p>
-    <script src="../../../core/scripts/main.js"></script>
+    <script src="/build/nami.js"></script>
     <script>
         
 
         let data = {
             bathymetry: '../data/bathymetry',
-            initialSurface: '../data/initialSurface',
+            initialSurface:{
+                file:'../data/initialSurface',
+            } ,
             coordinates: 'cartesian',
             waveWidth: 280,
             waveHeight: 280,
-            displayWidth: 512,
-            displayHeight: 512,
             xmin : -70,
             xmax : 69.5,
             ymin :  -70,
             ymax : 69.5,
             timeStep: 0.3/Math.sqrt(9.81*0.2)
         }
-
+        
         let output = {
+            displayWidth: 512,
+            displayHeight: 512,
             stopTime: 40/Math.sqrt(9.81*0.2)
+        };
+
+        let lifeCycle = {
+            modelStepDidFinish: (model, controller) =>{
+                // if(model.discretization.stepNumber % 100 !== 0){
+                //     return true;
+                // }
+                console.log(model.discretization.stepNumber, model.currentTime/60/60, controller.stopTime/60/60);
+                return false;
+            },
+
+            dataWasLoaded: (model)=>{
+                document.body.appendChild(model.canvas);
+            }
         }
 
-        let nami = new NAMI(data,output);
+        let nami = new NAMI.app(data,output,lifeCycle);
     </script>
 </body>
 
