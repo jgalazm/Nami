@@ -4,10 +4,6 @@
 
 <head>
     <meta charset="utf-8" />
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-
-
 </head>
 
 <body>
@@ -16,43 +12,49 @@
     <script>
         
 
+        const h = 0.2;
+        const dx = 0.5;
+        const nx = 280;
+        const dt = 0.3;
         let data = {
-            bathymetry: '../data/bathymetry',
+            bathymetry: [[h,h],[h,h]],//'../data/bathymetry',
             initialSurface:{
                 file:'../data/initialSurface',
             } ,
             coordinates: 'cartesian',
             equations: 'dispersive',
-            waveWidth: 280,
-            waveHeight: 280,
-            xmin : -70,
-            xmax : 69.5,
-            ymin :  -70,
-            ymax : 69.5,
-            timeStep: 0.3/Math.sqrt(9.81*0.2)
+            waveWidth: nx,
+            waveHeight: nx,
+            xmin : -nx/2*dx,
+            xmax : nx/2*dx,
+            ymin :  -nx/2*dx,
+            ymax : nx/2*dx,
+            timeStep: dt/Math.sqrt(9.81*h)/4
         }
         
         let output = {
             displayWidth: 512,
             displayHeight: 512,
-            stopTime: 40/Math.sqrt(9.81*0.2)
+            stopTime: 40/Math.sqrt(9.81*h)
         };
 
         let lifeCycle = {
             modelStepDidFinish: (model, controller) =>{
-                // if(model.discretization.stepNumber % 100 !== 0){
-                //     return true;
-                // }
                 console.log(model.discretization.stepNumber, model.currentTime/60/60, controller.stopTime/60/60);
                 return false;
             },
 
             dataWasLoaded: (model)=>{
                 document.body.appendChild(model.canvas);
+            },
+
+            controllerSimulationDidFinish: (model, controller) =>{
+                controller.downloadCurrentGridHeights();
             }
         }
 
-        let nami = new NAMI.app(data,output,lifeCycle);
+        let nami = new NAMI.app(data, output, lifeCycle);
+
     </script>
 </body>
 
