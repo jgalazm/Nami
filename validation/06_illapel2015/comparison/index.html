@@ -12,33 +12,43 @@
         }
         
         Plotly.d3.csv("../easywave/eWave.poi.ssh", function(err,rows){
+            Plotly.d3.json('../tsunamilab/pois', (err, json) => {
+                let traces = {};
+                Object.keys(rows[0]).forEach((key,index)=>{
+                    if(key=='Minute') return;
+                    
+                    let data = [];
+                    data.push({
+                        x: unpack(rows, 'Minute'),
+                        y: unpack(rows, key),
+                        mode: 'lines',
+                        name: 'easywave'
+                    });
 
-            let traces = {};
-            Object.keys(rows[0]).forEach((key,index)=>{
-                if(key=='Minute') return;
-                
-                let data = [];
-                data.push({
-                    x: unpack(rows, 'Minute'),
-                    y: unpack(rows, key),
-                    mode: 'lines',
-                    name: key
+                    data.push({
+                        x: json[key].time.map((val)=>{return val/60}),
+                        y: json[key].surface,
+                        mode: 'lines',
+                        name: 'nami'
+                    });
+    
+                    let layout = {
+                        title: key
+                    }
+                    
+                    let div = document.createElement('div');
+                    div.id = `div${index}`;
+                    document.body.appendChild(div);
+    
+                    
+                    Plotly.newPlot(div.id, data, layout);
                 });
-
-                let layout = {
-                    title: key
-                }
-                
-                let div = document.createElement('div');
-                div.id = `div${index}`;
-                document.body.appendChild(div);
-
-                
-                Plotly.newPlot(div.id, data, layout);
             });
             
+            
 
             
-        })
+        });
+
     </script>
 </body>
