@@ -2,8 +2,8 @@ let w = parseInt(360);
 let h = parseInt(1200);
 
 
-let cmin = -1.5;
-let cmax = 1.5;
+let cmin = -0.15;
+let cmax = 0.15;
 let colormap = {    
     thresholds: [0.0*(cmax-cmin) + cmin, 
                 0.06666666666666667*(cmax-cmin) + cmin, 
@@ -57,7 +57,7 @@ let output = {
     colormap: colormap,
     displayWidth:  w,
     displayHeight: h,
-    stopTime: 60*60*8,
+    stopTime: 60*60*3,
     displayOption: 'heights',
     pois:{
         // '21414': {location:[178.219,48.968]},
