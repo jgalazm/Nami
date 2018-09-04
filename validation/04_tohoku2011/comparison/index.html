@@ -1,0 +1,54 @@
+<body>
+    <div id='myDiv'></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        
+        function unpack(rows, key) {
+            return rows.map(function(row) { 
+                return row[key];
+            }).map( function(value){
+                return parseFloat(value);
+            });
+        }
+        
+        Plotly.d3.csv("../easywave/eWave.poi.ssh", function(err,rows){
+            Plotly.d3.json('../calculations/pois_3min', (err, json) => {
+                let traces = {};
+                Object.keys(rows[0]).forEach((key,index)=>{
+                    if(key=='Minute') return;
+                    
+                    let data = [];
+                    data.push({
+                        x: unpack(rows, 'Minute'),
+                        y: unpack(rows, key),
+                        mode: 'lines',
+                        name: 'easywave'
+                    });
+
+                    data.push({
+                        x: json[key].time.map((val)=>{return val/60}),
+                        y: json[key].surface,
+                        mode: 'lines',
+                        name: 'nami'
+                    });
+    
+                    let layout = {
+                        title: key
+                    }
+                    
+                    let div = document.createElement('div');
+                    div.id = `div${index}`;
+                    document.body.appendChild(div);
+    
+                    
+                    Plotly.newPlot(div.id, data, layout);
+                });
+            });
+            
+            
+
+            
+        });
+
+    </script>
+</body>

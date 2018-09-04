@@ -48,7 +48,7 @@ let data = {
     waveHeight: h,
     coordinates: 'spherical',
     equations: 'dispersive',
-    bathymetry: '../data/bathymetry4min',
+    bathymetry: '../data/bathymetry3min',
     binaryBathymetry: true,
     earthquake: '../data/earthquake.csv'
 }
@@ -57,7 +57,7 @@ let output = {
     colormap: colormap,
     displayWidth:  w/4,
     displayHeight: h/4,
-    stopTime: 60*60*5,
+    stopTime: 60*60*25,
     displayOption: 'heights',
     pois:{
         '21414': {location:[178.219,48.968]},
