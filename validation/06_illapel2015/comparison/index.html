@@ -12,36 +12,54 @@
         }
         
         Plotly.d3.csv("../easywave/eWave.poi.ssh", function(err,rows){
-            Plotly.d3.json('../tsunamilab/pois', (err, json) => {
+            Plotly.d3.json('../tsunamilab/pois (6)', (err, json) => {
                 let traces = {};
                 Object.keys(rows[0]).forEach((key,index)=>{
                     if(key=='Minute') return;
                     
-                    let data = [];
-                    data.push({
-                        x: unpack(rows, 'Minute'),
-                        y: unpack(rows, key),
-                        mode: 'lines',
-                        name: 'easywave'
+                    Plotly.d3.csv( `../data/${key}.txt`, (err, csv)=>{
+                        
+                        let data = [];
+                        data.push({
+                            x: unpack(rows, 'Minute'),
+                            y: unpack(rows, key),
+                            mode: 'lines',
+                            name: 'easywave'
+                        });
+                        console.log(Object.keys(json), key);
+                        data.push({
+                            x: json[key].time.map((val)=>{return val/60}),
+                            y: json[key].surface,
+                            mode: 'lines',
+                            name: 'nami'
+                        });
+        
+                        data.push({
+                            x: unpack(csv,'# time').map(val=>val*24*60),
+                            y: unpack(csv, 'height').map(val=>val/100),
+                            mode: 'lines',
+                            name: 'meas'
+                        });
+
+                        let layout = {
+                            title: key,
+                            xaxis: {
+                                range: [ 0, 180 ]
+                            },
+                        }
+
+                        if(key==='tsunamiDART32401'){
+                            layout.yaxis = {range:[-0.01/4,0.01/4]}
+                        }
+                        
+                        let div = document.createElement('div');
+                        div.id = `div${index}`;
+                        document.body.appendChild(div);
+        
+                        
+                        Plotly.newPlot(div.id, data, layout);
                     });
 
-                    data.push({
-                        x: json[key].time.map((val)=>{return val/60}),
-                        y: json[key].surface,
-                        mode: 'lines',
-                        name: 'nami'
-                    });
-    
-                    let layout = {
-                        title: key
-                    }
-                    
-                    let div = document.createElement('div');
-                    div.id = `div${index}`;
-                    document.body.appendChild(div);
-    
-                    
-                    Plotly.newPlot(div.id, data, layout);
                 });
             });
             

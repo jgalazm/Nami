@@ -79,7 +79,7 @@ let output = {
         // '32411': {location:[269.12,4.953]},
         // '32412': {location:[273.626,-17.984]},
         // '32413': {location:[266.483,-7.406]},
-        // '32401': {location:[286.579,-20.474]},
+        tsunamiDART32401: {location:[-73.421, -20.474]},
         anto:	{location: [-70.404441, -23.653133	], depth:1},
         aric:	{location: [-70.3232305, -18.4758	], depth:1},
         buca:	{location: [-72.046235, -34.639379	], depth:1},
