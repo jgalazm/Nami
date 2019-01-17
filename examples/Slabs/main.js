@@ -19,10 +19,6 @@ let data = {
     coordinates: 'spherical',
     bathymetry: [[1000,1000],[1000,1000]],
     earthquake: [{
-        depth: 22900,
-        strike: 17,
-        dip: 13.0,
-        rake: 108.0,
         U3: 0.0,
         cn: 0,   //centroid N coordinate, e
         ce: -5,
